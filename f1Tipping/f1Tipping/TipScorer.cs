@@ -15,109 +15,18 @@ namespace f1Tipping
     {
         private List<string> raceResultsList;
         private List<string> qualifyingResultsList;
+        private Formula1Api f1Api;
 
         public TipScorer()
         {
-            raceResultsList = RetrieveRaceResults(1);
-            qualifyingResultsList = RetrieveQualifyingResults(1);
+            f1Api = new Formula1Api();
+
+            raceResultsList = f1Api.RetrieveRaceResults(2016, 1);
+            qualifyingResultsList = f1Api.RetrieveQualiyingResults(2016, 1);
         }
-
-        private List<string> RetrieveRaceResults(int raceIndex)
-        {
-            const string resultsUrl = "http://ergast.com/api/f1/2016/{0}/results.json";
-
-            var apiUrl = string.Format(resultsUrl, raceIndex);
-
-            var client = new WebClient();
-            var json = client.DownloadString(apiUrl);
-
-            Ergast.Ergast raceResults = JsonConvert.DeserializeObject<Ergast.Ergast>(json);
-
-            var results = raceResults.MRData.RaceTable.Races[0].Results.Select(r =>
-                r.Driver.DriverId
-                );
-
-            return results.ToList();
-        }
-
-        private List<string> RetrieveQualifyingResults(int raceIndex)
-        {
-            const string resultsUrl = "http://ergast.com/api/f1/2016/{0}/qualifying.json";
-
-            var apiUrl = string.Format(resultsUrl, raceIndex);
-
-            var client = new WebClient();
-            var json = client.DownloadString(apiUrl);
-
-            Ergast.Ergast raceResults = JsonConvert.DeserializeObject<Ergast.Ergast>(json);
-
-            var results = raceResults.MRData.RaceTable.Races[0].QualifyingResults.Select(r =>
-                r.Driver.DriverId
-                );
-
-            return results.ToList();
-        }
-
-/*
-        private List<string> raceResultsList = new List<string>
-        {
-            "rosberg",
-            "hamilton",
-            "vettel",
-            "Riccardo",
-            "Massa",
-            "Grosjean",
-            "Hulkenberg",
-            "Bottas",
-            "Sainz",
-            "max_verstappen",
-            "jolyon_palmer",
-            "kevin_magnussen",
-            "Perez",
-            "Button",
-            "Nasr",
-            "Wehrlein",
-            "Ericsson",
-            "Raikkonen",
-            "Haryanto",
-            "gutierrez",
-            "Alsonso",
-            "Kyvat"
-        };
-
-        private List<string> qualifyingResultsList = new List<string>
-        {
-            "Hamilton",
-            "Rosberg",
-            "Vettel",
-            "Raikkonen",
-            "max_Verstappen",
-            "Massa",
-            "Sainz",
-            "Ricciardo",
-            "Perez",
-            "Hulkenberg",
-            "Bottas",
-            "Alonso",
-            "Button",
-            "Jolyon_Palmer",
-            "kevin_magnussen",
-            "ericsson",
-            "nasr",
-            "kyvat",
-            "grosjean",
-            "guitierrez",
-            "haryanto",
-            "wehrlein"
-        };
-*/
 
         public int ScoreTip(string tippedWinner, string tippedPole)
         {
-/*
-            var normalisedResulst = raceResultsList.Select(i => i.ToLowerInvariant()).ToList();
-            var normalisedQualificationResulst = qualifyingResultsList.Select(i => i.ToLowerInvariant()).ToList();*/
-
             var raceWinScore = raceResultsList.IndexOf(tippedWinner.ToLowerInvariant());
             var qualifyingScore = qualifyingResultsList.IndexOf(tippedPole.ToLowerInvariant());
 

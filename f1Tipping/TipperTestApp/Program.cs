@@ -12,6 +12,16 @@ namespace TipperTestApp
     {
         static void Main(string[] args)
         {
+
+            Console.OutputEncoding = Encoding.Unicode;
+
+            var f1Api = new Formula1Api();
+            var drivers = f1Api.RetrieveSeasonDrivers(2016);
+
+            drivers.ForEach(d=>
+                Console.WriteLine($"{d.DriverName} ({d.DriverId})")
+            );
+
             var sw = new Stopwatch();
             sw.Start();
             var tipScorer = new TipScorer();

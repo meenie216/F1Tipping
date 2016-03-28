@@ -16,6 +16,12 @@ namespace f1Tipping.Ergast
     {
         public RaceTable RaceTable { get; set; }
 
+        public DriverTable DriverTable { get; set; }
+    }
+
+    public class DriverTable
+    {
+        public Driver[] Drivers { get; set; }
     }
 
     public class RaceTable
@@ -25,6 +31,8 @@ namespace f1Tipping.Ergast
 
     public class Race
     {
+        public string RaceName { get; set; }
+
         public Results[] Results { get; set; }
 
         public Results[] QualifyingResults { get; set; }
@@ -38,7 +46,9 @@ namespace f1Tipping.Ergast
     public class Driver
     {
         public string DriverId { get; set; }
-        public string DriverName { get; set; }
+        public string DriverName => $"{this.GivenName} {this.FamilyName}";
 
+        public string GivenName { get; set; }
+        public string FamilyName { get; set; }
     }
 }

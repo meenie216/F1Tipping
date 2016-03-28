@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ergast\MRData.cs" />
+    <Compile Include="Formula1Api.cs" />
     <Compile Include="TipScorer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
