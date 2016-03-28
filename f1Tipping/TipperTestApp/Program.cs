@@ -17,10 +17,20 @@ namespace TipperTestApp
 
             var f1Api = new Formula1Api();
             var drivers = f1Api.RetrieveSeasonDrivers(2016);
+            var races = f1Api.RetrieveSeasonRaces(2016);
+
 
             drivers.ForEach(d=>
                 Console.WriteLine($"{d.DriverName} ({d.DriverId})")
             );
+
+            Console.WriteLine();
+
+            races.ForEach(r=>
+                Console.WriteLine(r.RaceName)
+            );
+
+            Console.WriteLine();
 
             var sw = new Stopwatch();
             sw.Start();

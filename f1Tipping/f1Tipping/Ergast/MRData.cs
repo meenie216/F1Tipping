@@ -33,6 +33,11 @@ namespace f1Tipping.Ergast
     {
         public string RaceName { get; set; }
 
+        public string  Date { get; set; }
+        public string Time { get; set; }
+
+        public DateTime RaceTime => DateTime.Parse($"{Date} {Time}");
+
         public Results[] Results { get; set; }
 
         public Results[] QualifyingResults { get; set; }

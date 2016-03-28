@@ -61,6 +61,16 @@ namespace f1Tipping
             var drivers = apiResult.MRData.DriverTable.Drivers.ToList();
 
             return drivers;
-        } 
+        }
+
+        public List<Race> RetrieveSeasonRaces(int year)
+        {
+            var uri = new Uri(string.Format(raceListUri, 2016));
+            var apiResult = MakeApiCall(uri);
+
+            var races = apiResult.MRData.RaceTable.Races.ToList();
+
+            return races;
+        }
     }
 }
